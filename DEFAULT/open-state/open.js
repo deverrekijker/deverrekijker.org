@@ -7,11 +7,14 @@ function refreshOpenBox(is_open,last_signal){
     document.getElementById('open-text').style.display = 'inline-block';
 
     document.getElementById('container').style.backgroundColor = (is_open==1)?OPEN_COL:CLOSED_COL;
-    document.getElementById('open-text').innerHTML = (is_open) ? "Open" : "Closed";
+    document.getElementById('open-text').innerHTML = (is_open)
+        ? "Currently open"
+        : "Currently closed <span style='font-size:12px'>(or troubled internet connection)</span>";
     document.getElementById('open-text').title = "Last signal received " + last_signal;
 }
 
 var callback = function(res) {
+    console.log(res)
     var d = JSON.parse(res);
     refreshOpenBox(
         d['is_open'],

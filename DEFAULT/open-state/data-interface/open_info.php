@@ -2,7 +2,7 @@
 
 require_once('../../config.php');
 
-$data = json_decode(file_get_contents(DATA));
+$data = json_decode(file_get_contents('../'.DATA));
 
 $last_open = $data[count($data)-1][1];
 $now = time();

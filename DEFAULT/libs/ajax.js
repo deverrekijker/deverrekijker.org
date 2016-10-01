@@ -4,7 +4,6 @@
 * */
 
 function request(url, method, data, callback){
-    
     var x = (window.XMLHttpRequest)
         ? new XMLHttpRequest() // IE7+, Firefox, Chrome, Opera, Safari
         : new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
@@ -12,7 +11,6 @@ function request(url, method, data, callback){
     x.onreadystatechange = function() {
         if (x.readyState==4){
             if(x.status==200) {
-                //console.log('"'+x.response+'"',url);
                 callback(x.response);
             }
             else console.log("Network error (" + x.status + ")");

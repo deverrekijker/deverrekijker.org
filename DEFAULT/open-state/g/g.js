@@ -1,80 +1,239 @@
+var VERTICAL = true;
+
+var PX_PER_X = 10,
+    PX_PER_Y = 10;
+
+var init_ts, init_date;
+
+var CLOSED_COLOR = 'grey',
+    OPEN_COLOR = '#4aff3d',
+    OPEN_HIGHLIGHT = 'darkgreen',
+    CLOSED_HIGHLIGHT = 'black';
+
+var num_days;
+var num_divs = 0;
+
+var superdiv = document.createElement('div');
+superdiv.id = 'superdiv';
+superdiv.style.display = "block";
+
+var tooltip = makeTooltip();
+tooltip.id = 'tooltip';
+
+superdiv.appendChild(tooltip);
+
+var UNITS_PER_DAY = 4 * 24;
+
+function makeDiv(x, y, width, height, color) {
+    var d = document.createElement('div');
+    d.className = 'cell';
+    d.style.position = "absolute";
+    d.style.display = "block";
+    d.style.left = x + 'px';
+    d.style.top = y + 'px';
+    d.style.height = height + 'px';
+    d.style.width = width + 'px';
+    d.style.backgroundColor = color;
+    return d;
+}
+
+function makeTooltip() {
+    var d = document.createElement('div');
+    d.style.position = "absolute";
+    return d;
+}
+
+function putRect(x1, y1, x2, open) {
+
+    var d;
+
+    if (VERTICAL) {
+
+        d = makeDiv(
+            x1 * PX_PER_X, (num_days - y1) * PX_PER_Y,
+            x2 * PX_PER_X - x1 * PX_PER_X,
+            PX_PER_Y, (open) ? OPEN_COLOR : CLOSED_COLOR
+        );
+
+    } else {
+
+        d = makeDiv(
+            y1 * PX_PER_Y,
+            x1 * PX_PER_X,
+            PX_PER_Y,
+            x2 * PX_PER_X - x1 * PX_PER_X, (open) ? OPEN_COLOR : CLOSED_COLOR
+        );
+    }
+    d.open = open;
+    return d;
+}
+
+var highlighted = [];
+
+function highlight(id) {
+    highlighted.push(id);
+    document.getElementById(id).style.backgroundColor = (document.getElementById(id).open) ? OPEN_HIGHLIGHT : CLOSED_HIGHLIGHT;
+}
+
+function unhighlight(id) {
+    document.getElementById(id).style.backgroundColor = (document.getElementById(id).open) ? OPEN_COLOR : CLOSED_COLOR;
+}
+
+function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes * 60000);
+}
+
+function coordinates_to_time(coordinates) {
+    var times = [];
+    for (var i in coordinates) {
+        var minutes = 15 * coordinates[i][1] + 24 * 60 * coordinates[i][0];
+        times.push(addMinutes(init_date, minutes));
+    }
+    return times;
+}
+
+function fn(e) {
+    tooltip.style.left = (e.pageX + 10) + 'px';
+    tooltip.style.top = (e.pageY - 80) + 'px';
+}
+
+document.addEventListener('mousemove', fn, false);
 
 function prezero(val) {
     if (val < 10) return "0" + val;
     else return val
 }
 
-function setTime(time) {
-    return prezero(time.getHours()) + ":" + prezero(time.getMinutes());
-}
+function timestring(d, no_hours) {
+    try {
+        if (isNaN(d.getDate())) return "";
+        if (d.getMonth().length == 0 || d.getMonth() == " ") return "";
+        var s = prezero(d.getDate()) + "." + prezero(d.getMonth() + 1) + "." + d.getFullYear();
+        if (no_hours) {
 
-function setDate(time) {
-    return time.getFullYear() + "-" + prezero(time.getMonth() + 1) + "-" + prezero(time.getDate());
-}
-
-function setTimeAndDate(time) {
-    return setDate(time) + "T" + setTime(time);
-}
-
-function get_date_limit(key,default_date){
-
-    var date;
-    if (document.getElementById(key).value==""){
-        date = default_date;
-        document.getElementById(key).value = setTimeAndDate(date);
-    }
-    else date = new Date(document.getElementById(key).value);
-    return date;
-}
-
-function get_dps(d){
-
-    var dps = [];
-
-    var date_limits = [
-        get_date_limit('from',new Date(d[0][0]*1000)), // from date: take from input or use first datapoint
-        get_date_limit('to',new Date()) // to date: take from input or use current time
-    ];
-
-    var open, close;
-
-    for (var i in d){
-
-        open = new Date(d[i][0]*1000);
-        close = new Date(d[i][1]*1000);
-
-        if (close < date_limits[0]) continue;
-        else if (open > date_limits[1]) break;
-
-        if (d[i].length > 2 && d[i][2] == 0.5 ){
-            // [start of missing data, end of missing data]
-            dps.push({x:open,y:0.5});
-            dps.push({x:close,y:0.5});
         } else {
-            // [opening time, closing time]
-            dps.push({x:open,y:1});
-            dps.push({x:close,y:0});
+            s += " " + prezero(d.getHours()) + ":" + prezero(d.getMinutes());
         }
+        return s;
+    } catch (e) {
+        return e;
     }
-
-    dps.push({
-        x:new Date(),
-        y:dps[dps.length-1].y
-    });
-
-    return dps;
 }
 
-function updateDatapoints(){
+function updateTooltip(t) {
+    document.getElementById('tooltip').innerHTML = timestring(t[0]) + "<br>" + timestring(t[1]);
+}
 
-    request(
-        get_dps_url,
-        "get",
-        null,
-        function (server_response) {
-            var data = JSON.parse(server_response);
-            if (data['error']=='error') console.log('Server reported error:',res['error']);
-            else document.getElementById('chartContainer').appendChild(constructGraph(get_dps(data), minutes_interval));
+function createHandler(ds) {
+    return function() {
+        while (highlighted.length > 0) unhighlight(highlighted.pop());
+        for (var d in ds) {
+            highlight(ds[d]);
+            updateTooltip(coordinates_to_time(document.getElementById([ds[d]]).coordinates))
         }
-    );
+    }
+}
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+};
+
+function putDateCol(days_since_init) {
+
+    var e = putRect(4 * 24, days_since_init, UNITS_PER_DAY + 10);
+    e.className = 'datecell';
+    e.innerHTML = timestring(init_date.addDays(days_since_init), true);
+    return e;
+}
+
+function visualize(data) {
+
+
+    var x1, y1, x2, y2;
+
+    var y;
+
+    var divs = [];
+
+    num_days = data[data.length - 1][0];
+
+    for (var i = 0; i < data.length - 1; i++) {
+
+        if (data[i].length == 3) {
+            continue;
+        }
+
+        var open = (i % 2 == 1);
+
+        x1 = data[i][1];
+        y1 = data[i][0];
+        x2 = data[i + 1][1];
+        y2 = data[i + 1][0];
+
+        var these_divs = []; // the set of divs added for this time period
+
+        // if same day as next change until another point this day
+        if (y1 == y2) {
+            // until next change
+            these_divs.push(putRect(x1, y1, x2, open));
+            these_divs[these_divs.length - 1].coordinates = [
+                [y1, x1],
+                [y2, x2], open
+            ];
+        } else {
+            // until midnight
+            these_divs.push(putRect(x1, y1, UNITS_PER_DAY, open));
+            divs.push(putDateCol(y));
+            these_divs[these_divs.length - 1].coordinates = [
+                [y1, x1],
+                [y2, x2], open
+            ];
+
+            var full_days = y2 - y1 - 1;
+            y = y1;
+            // for all full days
+            while (full_days-- > 2) {
+
+                these_divs.push(putRect(0, ++y, UNITS_PER_DAY, open));
+                these_divs[these_divs.length - 1].coordinates = [
+                    [y1, x1],
+                    [y2, x2], open
+                ];
+                divs.push(putDateCol(y));
+            }
+
+            // from midnight until next coordinate
+            these_divs.push(putRect(0, y2, x2, open));
+            these_divs[these_divs.length - 1].coordinates = [
+                [y1, x1],
+                [y2, x2], open
+            ];
+            divs.push(putDateCol(y));
+        }
+
+        var ids = [];
+
+        for (var d in these_divs) {
+            these_divs[d].id = 'div_' + num_divs++;
+            ids.push(these_divs[d].id);
+        }
+        var f = createHandler(ids);
+        for (var d in these_divs) {
+            these_divs[d].onmouseover = f;
+            divs.push(these_divs[d]);
+        }
+    }
+    for (var d in divs) {
+        superdiv.appendChild(divs[d]);
+    }
+
+    for (var i = 1; i <= 3; i++) {
+        //document.getElementById('b'+i).style.height = PX_PER_Y * (num_days-4) + "px";
+        document.getElementById('b' + i).style.height = PX_PER_Y * (num_days + 2) + "px";
+        document.getElementById('b' + i).style.left = (i * 232) + "px";
+        document.getElementById('b' + i).style.position = "absolute";
+    }
+
+    document.getElementById('vis-container').appendChild(superdiv);
 }
