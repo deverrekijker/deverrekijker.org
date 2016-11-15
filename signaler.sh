@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 URL="http://deverrekijker.org"
@@ -13,9 +12,11 @@ function get_timestamp() {
 
 function send_request() {
     # local log
-    LOG=$(cat $DIR"t_open.txt")
+    LOG=$(cat $DIR"/t_open.txt")
 
-    # send query, receive response
+    echo $LOG
+
+    # send query, receive response   
     SERVER_RESPONSE=$(curl --data "secret=$SECRET&data=$LOG" -s $URL/open-state/listener.php)
 
     # if server accepted data
@@ -48,7 +49,7 @@ echo $TIMESTAMP >> $DIR"/t_open.txt"
 #if we have internet
 echo "[LOG] Checking for Internet connection..."
 
-case "$(curl -s --max-time 2 -I "$REQ_ADDR" | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
+case "$(curl -s --max-time 2 -I google.com | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
    [23])
        echo "[SUCCESS] HTTP connectivity is up"
        send_request
