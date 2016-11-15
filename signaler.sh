@@ -1,9 +1,15 @@
+
 #!/bin/bash
 
 URL="http://deverrekijker.org"
 REQ_ADDR=URL
 TIMESTAMP=$(perl -e 'print time')
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+function get_timestamp() {
+  printf  "[LOG] Timestamp: "
+  date +"%d:%m:%Y %T"
+}
 
 function send_request() {
     # local log
@@ -30,9 +36,10 @@ function fuck() {
 
     echo "[WARNING] Rebooting now..."
     # reboot,
-    sudo shutdown -r now
+    #sudo shutdown -r now
 }
 
+get_timestamp
 echo "[LOG] Current directory: "$DIR
 
 # log current time
