@@ -36,7 +36,7 @@ function fuck() {
 
     echo "[WARNING] Rebooting now..."
     # reboot,
-    #sudo shutdown -r now
+    sudo shutdown -r now
 }
 
 get_timestamp
