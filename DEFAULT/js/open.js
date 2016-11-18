@@ -8,7 +8,7 @@ function refreshOpenBox(is_open,last_signal){
 
     document.getElementById('open-text').style.backgroundColor = (is_open==1)?OPEN_COL:CLOSED_COL;
     document.getElementById('open-text').innerHTML = (is_open)
-        ? "<h2>Currently open</h2>"
+        ? "<h2>Currently open</h2><span style='font-size:12px'>(within the last 5 minutes)</span>"
         : "<h2>Currently closed</h2><span style='font-size:12px'> (or the VU network sucks)</span>";
     document.getElementById('open-text').title = "Last signal received " + last_signal;
 }
