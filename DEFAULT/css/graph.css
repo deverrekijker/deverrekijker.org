@@ -33,5 +33,5 @@ html,body,#bordercontainer,.yalign{height:100%}
     border : 1px solid black;
     padding : 2px;
     z-index : 1;
-    font-size : 12px;
+    font-size : 16px;
 }
