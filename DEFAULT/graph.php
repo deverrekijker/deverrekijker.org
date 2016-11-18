@@ -8,7 +8,7 @@ require_once('config.php');
         <meta charset="utf-8">
         <script src="js/ajax.js"></script>
         <script src="js/graph.js"></script>
-        <link rel="stylesheet" href="js/graph.css">
+        <link rel="stylesheet" href="css/graph.css">
     </head>
 
     <body>
