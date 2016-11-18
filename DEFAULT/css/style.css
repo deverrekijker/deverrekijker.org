@@ -1,0 +1,94 @@
+h1 {
+  font-family: "Noto-Serif",Georgia,Baskerville,Palatino,"Palatino Linotype","Book Antiqua","Times New Roman",serif !important;
+}
+
+h2 {
+  font-size: 24px !important;
+  margin: 0 0 16px 0 !important;
+}
+
+h3 {
+  display: inline;
+}
+
+a {
+  color: rgb(208, 68, 69) !important;
+}
+
+nav {
+  margin-bottom: 16px;
+}
+
+body {
+  font-family: Consolas,Monaco,"Courier New",Courier,monospace,sans-serif !important;
+  background-image: url('../img/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+header > a, nav > a {
+  display: inline-block;
+}
+
+header h1 {
+  margin-top: 0;
+}
+
+footer {
+  width: 100%;
+  padding: 6px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+#container, footer {
+  background-color: rgba(252,240,240,0.96);
+}
+
+#open-text {
+  width: 100%;
+  padding: 16px;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+}
+
+#open-text:hover, .nav li:hover {
+  opacity: 0.8;
+}
+
+#open-box {
+  float: right;
+  width: 100%;
+}
+
+#header-left {
+  display: inline-block;
+}
+
+#header-right, .right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+nav {
+  background-color: rgb(208, 68, 69) !important;
+  margin: 16px 0;
+  padding: 8px;
+}
+
+nav > a {
+  padding: 8px 32px 8px 0;
+}
+
+nav h3 {
+  color: white;
+}
+
+.navbar {
+  border: none !important;
+}

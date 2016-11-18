@@ -1,10 +1,14 @@
+<?php
+require_once('config.php');
+?>
+
 <html>
 
     <head>
         <meta charset="utf-8">
-        <script src="libs/ajax.js"></script>
-        <script src="open-state/g/g.js"></script>
-        <link rel="stylesheet" href="open-state/g/g.css">
+        <script src="js/ajax.js"></script>
+        <script src="js/graph.js"></script>
+        <link rel="stylesheet" href="js/graph.css">
     </head>
 
     <body>

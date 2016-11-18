@@ -33,5 +33,3 @@ define("SOURCE","https://github.com/deverrekijker/OpenTimesTracker"); // link to
 // institution name
 define("INSTITUTION_ACRONYM","DV");
 define("INSTITUTION_NAME","De Verrekijker");
-
-
