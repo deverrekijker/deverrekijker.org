@@ -1,7 +1,7 @@
 var VERTICAL = true;
 
 var PX_PER_X = 10,
-    PX_PER_Y = 10;
+    PX_PER_Y = 16;
 
 var init_ts, init_date;
 
