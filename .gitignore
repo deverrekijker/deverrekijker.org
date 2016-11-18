@@ -1,1 +1,5 @@
 private_html/data.json
+*.bak
+t_inet_fail.txt
+t_open.txt
+*.txt
