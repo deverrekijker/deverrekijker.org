@@ -7,6 +7,7 @@ URL="http://deverrekijker.org"
 REQ_ADDR=URL
 TIMESTAMP=$(perl -e 'print time')
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+OK_RESPONSE="okidok"
 
 function get_timestamp() {
   printf  "[LOG] Timestamp: "
@@ -23,10 +24,10 @@ function send_request() {
     SERVER_RESPONSE=$(curl --data "secret=$SECRET&data=$LOG" -s $URL/open-state/listener.php)
 
     # if server accepted data
-    if [ "$SERVER_RESPONSE" == "okidok" ]
-    then
+    if [[ "$SERVER_RESPONSE" == *$OK_RESPONSE* ]]; then
         # delete log
         rm -f $DIR"/t_open.txt"
+   	echo "[LOG] t_open.txt deleted"
     fi
 
     echo $TIMESTAMP - Server response: $SERVER_RESPONSE
