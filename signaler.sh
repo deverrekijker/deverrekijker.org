@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get the SECRET env variable from .profile
+source /home/pi/.profile
+
 URL="http://deverrekijker.org"
 REQ_ADDR=URL
 TIMESTAMP=$(perl -e 'print time')
@@ -16,7 +19,7 @@ function send_request() {
 
     echo $LOG
 
-    # send query, receive response   
+    # send query, receive response
     SERVER_RESPONSE=$(curl --data "secret=$SECRET&data=$LOG" -s $URL/open-state/listener.php)
 
     # if server accepted data
@@ -40,8 +43,10 @@ function fuck() {
     sudo shutdown -r now
 }
 
+echo
 get_timestamp
 echo "[LOG] Current directory: "$DIR
+echo "Secret key: "$SECRET
 
 # log current time
 echo $TIMESTAMP >> $DIR"/t_open.txt"
