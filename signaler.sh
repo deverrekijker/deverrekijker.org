@@ -46,7 +46,7 @@ function fuck() {
 echo
 get_timestamp
 echo "[LOG] Current directory: "$DIR
-echo "Secret key: "$SECRET
+echo "[LOG] Secret key: "$SECRET
 
 # log current time
 echo $TIMESTAMP >> $DIR"/t_open.txt"
