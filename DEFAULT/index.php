@@ -42,7 +42,7 @@
 	</ul>
 	</nav>
 
-			<p id='txt'><?php require_once('text.html'); ?></p>
+			<div id='txt'><?php require_once('text.html'); ?></div>
 	</div>
 </div>
 
