@@ -8,7 +8,7 @@
       <meta charset="UTF-8">
       <link rel="stylesheet" type="text/css" href="css/style.css">
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <title><?php echo $INSTITUTION_NAME ?></title>
+      <title><?php echo INSTITUTION_NAME ?></title>
       <script type="text/javascript" src="js/ajax.js"></script>
       <script type="text/javascript" src="js/open.js"></script>
    </head>
@@ -17,7 +17,7 @@
          <div class="jumbotron" id="container" style="margin-bottom:0;border-radius:0">
             <header id='header' class='row'>
                <div id='header-left' class='left col-xs-8'>
-                  <h1>De Verrekijker</h1>
+                  <h1><?php echo INSTITUTION_NAME ?></h1>
                   <em>Opening doors on VU Campus, <a target="_blank" href="http://www.advalvas.vu.nl/nieuws/vu-niet-blij-met-academisch-caf%C3%A9-de-verrekijker">since May 2015</a></em>
                </div>
                <div id='header-right' class='right col-xs-4'>
