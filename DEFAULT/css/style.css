@@ -22,9 +22,11 @@ nav {
 
 body {
   font-family: Consolas,Monaco,"Courier New",Courier,monospace,sans-serif !important;
-  background-image: url('../img/bg.jpg');
+  background: url('../img/bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 header > a, nav > a {
@@ -45,6 +47,7 @@ footer {
 
 #container, footer {
   background-color: rgba(252,240,240,0.96);
+  margin-top: 48px;
 }
 
 #open-text {

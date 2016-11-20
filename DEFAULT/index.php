@@ -8,7 +8,7 @@
       <meta charset="UTF-8">
       <link rel="stylesheet" type="text/css" href="css/style.css">
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <title>De Verrekijker</title>
+      <title><?php echo $INSTITUTION_NAME ?></title>
       <script type="text/javascript" src="js/ajax.js"></script>
       <script type="text/javascript" src="js/open.js"></script>
    </head>

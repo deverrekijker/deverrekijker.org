@@ -28,7 +28,7 @@ define("MINUTES_INTERVAL",5); // number of minutes for each block
 
 // source
 define("SOURCE_TEXT","source"); // link text for source
-define("SOURCE","https://github.com/deverrekijker/OpenTimesTracker"); // link to source. set to false to not show
+define("SOURCE","https://github.com/deverrekijker/deverrekijker.org"); // link to source. set to false to not show
 
 // institution name
 define("INSTITUTION_ACRONYM","DV");
