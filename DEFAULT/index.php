@@ -1,13 +1,14 @@
+<?php
+   require_once ('config.php');
+   ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
    <head>
       <meta charset="UTF-8">
       <link rel="stylesheet" type="text/css" href="css/style.css">
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
       <title>De Verrekijker</title>
-      <?php
-         require_once ('config.php');
-         ?>
       <script type="text/javascript" src="js/ajax.js"></script>
       <script type="text/javascript" src="js/open.js"></script>
    </head>
