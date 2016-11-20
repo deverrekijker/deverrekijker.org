@@ -12,6 +12,7 @@ h3 {
 }
 
 a {
+  cursor:pointer;
   color: rgb(208, 68, 69) !important;
 }
 
