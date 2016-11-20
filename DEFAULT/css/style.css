@@ -27,6 +27,15 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+body > .container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 header > a, nav > a {
@@ -47,7 +56,6 @@ footer {
 
 #container, footer {
   background-color: rgba(252,240,240,0.96);
-  margin-top: 48px;
 }
 
 #open-text {
