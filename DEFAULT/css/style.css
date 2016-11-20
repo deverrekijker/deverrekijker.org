@@ -30,6 +30,7 @@ body {
   height: 100%;
   width: 100%;
   position: absolute;
+  padding-bottom: 32px; /* For footer */
 }
 
 body > .container {
