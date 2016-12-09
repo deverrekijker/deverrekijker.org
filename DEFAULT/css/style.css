@@ -27,6 +27,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  -ms-behavior: url(/backgroundsize.min.htc);
   background-color: rgb(252,240,240);
   -webkit-background-size: cover;
   -moz-background-size: cover;
