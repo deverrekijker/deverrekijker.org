@@ -71,6 +71,9 @@
          </div>
       </div>
       <footer>
+        <span class="left">
+          <strong>Bitcoin!</strong> <em>1LxgQ5pJdRpPpdUzVpu7tF2wt1MQuMCAvu</em>
+        </span>
          <span class="right">
          <em>Think our website sucks? <a target="_blank" href="https://github.com/deverrekijker/deverrekijker.org">Help improve it!</a></em>
          </span>
