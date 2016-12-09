@@ -22,11 +22,15 @@ nav {
 
 body {
   font-family: Consolas,Monaco,"Courier New",Courier,monospace,sans-serif !important;
-  background: url('../img/bg.jpg') no-repeat center center fixed;
+  background-image: url('../img/bg.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: rgb(252,240,240);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
   height: 100%;
   width: 100%;
   position: absolute;
