@@ -70,7 +70,8 @@
                require_once ('text.html');
 
                ?>
-               <div style="margin:0 auto;" class="blockchain-btn"
+              <div id="bitcoin-container" class='col-xs-12'>
+               <div class="blockchain-btn"
      data-address="1LxgQ5pJdRpPpdUzVpu7tF2wt1MQuMCAvu"
      data-shared="false">
     <div class="blockchain stage-begin">
@@ -80,7 +81,7 @@
         <img src="https://blockchain.info/Resources/loading-large.gif"/>
     </div>-->
     <div class="blockchain stage-ready">
-         <p align="center">Bitcoin!!!111: <b>[[address]]</b></p>
+         <p align="center">Bitcoin!!!111: <br><strong>[[address]]</strong></p>
          <p align="center" class="qr-code"></p>
     </div>
     <div class="blockchain stage-paid">
@@ -89,6 +90,7 @@
     <div class="blockchain stage-error">
         <font color="red">[[error]]</font>
     </div>
+</div>
 </div>
              </div>
          </div>

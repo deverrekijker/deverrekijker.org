@@ -35,12 +35,17 @@ html{
  min-height:100%;
  }
 
-.blockchain-btn {
-  width: 300px;
+#bitcoin-container {
+  float: none !important;
 }
 
-.blockchain-btn p {
-  font-size: 16px !important;
+.blockchain-btn {
+  margin: 0 auto;
+  width: 442px;
+}
+
+.stage-begin {
+  text-align: center;
 }
 
 body {
