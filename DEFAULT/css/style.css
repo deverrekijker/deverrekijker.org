@@ -95,7 +95,6 @@ body {
   min-height:100%;
   width: 100%;
   position: absolute;
-  padding-bottom: 32px; /* For footer */
 }
 
 body > .container {
@@ -115,15 +114,17 @@ header h1 {
   margin-top: 0;
 }
 
-footer {
+/*footer {
   width: 100%;
   padding: 6px;
   position: fixed;
   right: 0;
   bottom: 0;
-}
+}*/
 
-#container, footer {
+footer {padding-top: 32px;}
+
+#container {
   background-color: rgba(252,240,240,0.96);
 }
 
