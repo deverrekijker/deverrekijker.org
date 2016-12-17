@@ -1,9 +1,9 @@
 h1 {
   font-family: "Noto-Serif",Georgia,Baskerville,Palatino,"Palatino Linotype","Book Antiqua","Times New Roman",serif !important;
+  font-size: 69px !important;
 }
 
 h2 {
-  font-size: 3vmin !important;
   margin: 0 0 16px 0 !important;
 }
 
@@ -16,6 +16,16 @@ a {
   color: rgb(208, 68, 69) !important;
 }
 
+@media (max-width: 580px) {
+  #header-left, #header-right {
+    width: 100%;
+  }
+
+  #header-left {
+    margin-bottom: 10px;
+  }
+}
+
 nav {
   margin-bottom: 16px;
 }
@@ -24,6 +34,14 @@ html{
  height:100%;
  min-height:100%;
  }
+
+.blockchain-btn {
+  width: 300px;
+}
+
+.blockchain-btn p {
+  font-size: 16px !important;
+}
 
 body {
   font-family: Consolas,Monaco,"Courier New",Courier,monospace,sans-serif !important;

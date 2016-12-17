@@ -6,12 +6,14 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=0.75">
+      <meta name="viewport" content="width=device-width, initial-scale=0.70">
       <link rel="stylesheet" type="text/css" href="css/style.css">
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
       <title><?php echo INSTITUTION_NAME ?></title>
       <script type="text/javascript" src="js/ajax.js"></script>
       <script type="text/javascript" src="js/open.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+      <script type="text/javascript" src="https://blockchain.info/Resources/js/pay-now-button.js"></script>
    </head>
    <body>
       <div class="container">
@@ -67,13 +69,31 @@
             <div id='txt'><?php
                require_once ('text.html');
 
-               ?></div>
+               ?>
+               <div style="margin:0 auto;" class="blockchain-btn"
+     data-address="1LxgQ5pJdRpPpdUzVpu7tF2wt1MQuMCAvu"
+     data-shared="false">
+    <div class="blockchain stage-begin">
+        <img src="https://blockchain.info/Resources/buttons/donate_64.png"/>
+    </div>
+    <!--<div class="blockchain stage-loading" style="text-align:center">
+        <img src="https://blockchain.info/Resources/loading-large.gif"/>
+    </div>-->
+    <div class="blockchain stage-ready">
+         <p align="center">Bitcoin!!!111: <b>[[address]]</b></p>
+         <p align="center" class="qr-code"></p>
+    </div>
+    <div class="blockchain stage-paid">
+         Donation of <b>[[value]] BTC</b> Received. Thank You!
+    </div>
+    <div class="blockchain stage-error">
+        <font color="red">[[error]]</font>
+    </div>
+</div>
+             </div>
          </div>
       </div>
       <footer>
-        <span class="left">
-          <strong>Bitcoin!</strong> <em>1LxgQ5pJdRpPpdUzVpu7tF2wt1MQuMCAvu</em>
-        </span>
          <span class="right">
          <em>Think our website sucks? <a target="_blank" href="https://github.com/deverrekijker/deverrekijker.org">Help improve it!</a></em>
          </span>
