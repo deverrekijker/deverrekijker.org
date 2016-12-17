@@ -24,8 +24,7 @@
 
         array_push($log_info,$err);
 
-        if (LOCAL!=1) file_put_contents(REQ_LOG,json_encode($log_info), FILE_APPEND | LOCK_EX) or die(json_encode(error_get_last()).PHP_EOL);
-        else echo json_encode($log_info);
+        //if (LOCAL!=1) file_put_contents(REQ_LOG,json_encode($log_info), FILE_APPEND | LOCK_EX) or die(json_encode(error_get_last()).PHP_EOL);else echo json_encode($log_info);
 
         return $err<1;
     }

@@ -1,8 +1,7 @@
 <?php
 require_once("../config.php");
 
-file_put_contents('log2.txt',file_get_contents('log2.txt').json_encode($_POST));
-
+// file_put_contents('log2.txt',file_get_contents('log2.txt').json_encode($_POST));
 
 require_once("data-interface/validate_datapush.php");
 if (!validate_datapush($_POST)) {exit(0);}
