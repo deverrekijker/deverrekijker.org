@@ -16,6 +16,12 @@ a {
   color: rgb(208, 68, 69) !important;
 }
 
+h1:after {
+  content: "\221E";
+  font-family: Consolas,Monaco,"Courier New",Courier,monospace,sans-serif;
+  margin-left: 12px;
+}
+
 li:before {
   content: "\221E";
   color: #FFF;
@@ -31,6 +37,12 @@ li:before {
 
   #header-left {
     margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 752px) {
+  li:before {
+    margin: 3px 8px 0 8px;
   }
 }
 
