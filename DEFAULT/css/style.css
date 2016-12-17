@@ -16,6 +16,14 @@ a {
   color: rgb(208, 68, 69) !important;
 }
 
+li:before {
+  content: "\221E";
+  color: #FFF;
+  float: left;
+  margin: 8px 0px 8px -8px;
+  font-size: 28px;
+}
+
 @media (max-width: 580px) {
   #header-left, #header-right {
     width: 100%;
@@ -34,6 +42,10 @@ a {
 
 nav {
   margin-bottom: 16px;
+}
+
+.navbar-nav > li {
+  padding-left: 8px;
 }
 
 html{
