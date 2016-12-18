@@ -31,20 +31,23 @@ li:before {
   font-weight: bold;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 768px) {
+  li:before {
+    margin: 3px 8px 0 8px;
+  }
+
   #header-left, #header-right {
     width: 100%;
   }
 
   #header-left {
     margin-bottom: 10px;
+    text-align: center;
   }
-}
 
-@media (max-width: 752px) {
-  li:before {
-    margin: 3px 8px 0 8px;
-  }
+  .left, .right {float: none !important;}
+
+  footer {text-align: center;}
 }
 
 @media (max-width: 992px) {
@@ -147,7 +150,7 @@ footer {padding-top: 32px;}
   margin-bottom: 20px !important;
 }
 
-#open-text:hover, .nav li:hover {
+#open-text:hover, nav li:hover  {
   opacity: 0.8;
 }
 
