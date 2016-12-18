@@ -7,7 +7,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.7">
+        <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, target-densitydpi=medium-dpi, user-scalable=0" />
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <title>

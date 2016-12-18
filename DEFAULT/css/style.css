@@ -53,6 +53,12 @@ li:before {
   }
 }
 
+@media (min-width: 768px) {
+  .jumbotron {
+    padding: 32px !important;
+  }
+}
+
 nav {
   margin-bottom: 16px;
 }
