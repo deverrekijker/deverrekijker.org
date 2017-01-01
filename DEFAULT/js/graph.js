@@ -3,6 +3,8 @@ var VERTICAL = true;
 var PX_PER_X = 10,
     PX_PER_Y = 16;
 
+var UNITS_PER_DAY = 4 * 24;
+
 var init_ts, init_date;
 
 var CLOSED_COLOR = 'grey',
@@ -22,7 +24,6 @@ tooltip.id = 'tooltip';
 
 superdiv.appendChild(tooltip);
 
-var UNITS_PER_DAY = 4 * 24;
 
 function makeDiv(x, y, width, height, color) {
     var d = document.createElement('div');
@@ -193,7 +194,7 @@ function visualize(data) {
             var full_days = y2 - y1 - 1;
             y = y1;
             // for all full days
-            while (full_days-- > 2) {
+            while (full_days-- > 0) {
 
                 these_divs.push(putRect(0, ++y, UNITS_PER_DAY, open));
                 these_divs[these_divs.length - 1].coordinates = [
