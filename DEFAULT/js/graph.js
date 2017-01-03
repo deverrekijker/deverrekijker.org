@@ -112,14 +112,12 @@ function prezero(val) {
 function timestring(d, no_hours) {
     try {
         if (isNaN(d.getDate()) || isNaN(d.getMonth())) {
-            console.log(d)
             return "";
         }
         var s = prezero(d.getDate()) + "." + prezero(d.getMonth() + 1) + "." + d.getFullYear();
         if (!no_hours) s += " " + prezero(d.getHours()) + ":" + prezero(d.getMinutes());
         return s;
     } catch (e) {
-        console.log(e);
         return e;
     }
 }
@@ -149,7 +147,6 @@ function putDateCol(days_since_init) {
 
     var e = putRect(4 * 24, days_since_init, UNITS_PER_DAY + 10);
     e.className = 'datecell';
-    console.log(days_since_init)
     e.innerHTML = timestring(init_date.addDays(days_since_init), true);
     return e;
 }
@@ -230,6 +227,9 @@ function visualize(data) {
         var f = createHandler(ids);
         for (var d in these_divs) {
             these_divs[d].onmouseover = f;
+	    these_divs[d].onmouseout = function(){
+		document.getElementById('tooltip').style.display="none";
+		while (highlighted.length > 0) unhighlight(highlighted.pop());}
             divs.push(these_divs[d]);
         }
     }
