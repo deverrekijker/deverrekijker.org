@@ -40,6 +40,7 @@ function makeDiv(x, y, width, height, color) {
 function makeTooltip() {
     var d = document.createElement('div');
     d.style.position = "absolute";
+    d.style.display = "none"
     return d;
 }
 
@@ -70,13 +71,17 @@ function putRect(x1, y1, x2, open) {
 
 var highlighted = [];
 
+function isOpen(id) {
+    return document.getElementById(id).open
+}
+
 function highlight(id) {
     highlighted.push(id);
-    document.getElementById(id).style.backgroundColor = (document.getElementById(id).open) ? OPEN_HIGHLIGHT : CLOSED_HIGHLIGHT;
+    document.getElementById(id).style.backgroundColor = isOpen(id) ? OPEN_HIGHLIGHT : CLOSED_HIGHLIGHT;
 }
 
 function unhighlight(id) {
-    document.getElementById(id).style.backgroundColor = (document.getElementById(id).open) ? OPEN_COLOR : CLOSED_COLOR;
+    document.getElementById(id).style.backgroundColor = isOpen(id) ? OPEN_COLOR : CLOSED_COLOR;
 }
 
 function addMinutes(date, minutes) {
@@ -106,22 +111,21 @@ function prezero(val) {
 
 function timestring(d, no_hours) {
     try {
-        if (isNaN(d.getDate())) return "";
-        if (d.getMonth().length == 0 || d.getMonth() == " ") return "";
-        var s = prezero(d.getDate()) + "." + prezero(d.getMonth() + 1) + "." + d.getFullYear();
-        if (no_hours) {
-
-        } else {
-            s += " " + prezero(d.getHours()) + ":" + prezero(d.getMinutes());
+        if (isNaN(d.getDate()) || isNaN(d.getMonth())) {
+            return "";
         }
+        var s = prezero(d.getDate()) + "." + prezero(d.getMonth() + 1) + "." + d.getFullYear();
+        if (!no_hours) s += " " + prezero(d.getHours()) + ":" + prezero(d.getMinutes());
         return s;
     } catch (e) {
         return e;
     }
 }
 
-function updateTooltip(t) {
-    document.getElementById('tooltip').innerHTML = timestring(t[0]) + "<br>" + timestring(t[1]);
+function updateTooltip(t, o) {
+    document.getElementById('tooltip').style.display = "block";
+    document.getElementById('tooltip').innerHTML = ((o) ? "Open" : "Closed") + "<br>fr " + timestring(t[0]) + "<br>to " + timestring(t[1]);
+
 }
 
 function createHandler(ds) {
@@ -129,7 +133,7 @@ function createHandler(ds) {
         while (highlighted.length > 0) unhighlight(highlighted.pop());
         for (var d in ds) {
             highlight(ds[d]);
-            updateTooltip(coordinates_to_time(document.getElementById([ds[d]]).coordinates))
+            updateTooltip(coordinates_to_time(document.getElementById([ds[d]]).coordinates), isOpen(ds[d]))
         }
     }
 }
@@ -171,6 +175,8 @@ function visualize(data) {
         x2 = data[i + 1][1];
         y2 = data[i + 1][0];
 
+        y = y1;
+
         var these_divs = []; // the set of divs added for this time period
 
         // if same day as next change until another point this day
@@ -191,9 +197,9 @@ function visualize(data) {
             ];
 
             var full_days = y2 - y1 - 1;
-            y = y1;
+
             // for all full days
-            while (full_days-- > 2) {
+            while (full_days-- > 0) {
 
                 these_divs.push(putRect(0, ++y, UNITS_PER_DAY, open));
                 these_divs[these_divs.length - 1].coordinates = [
@@ -221,6 +227,9 @@ function visualize(data) {
         var f = createHandler(ids);
         for (var d in these_divs) {
             these_divs[d].onmouseover = f;
+	    these_divs[d].onmouseout = function(){
+		document.getElementById('tooltip').style.display="none";
+		while (highlighted.length > 0) unhighlight(highlighted.pop());}
             divs.push(these_divs[d]);
         }
     }
