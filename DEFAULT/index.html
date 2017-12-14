@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=0.7, maximum-scale=0.7, target-densitydpi=medium-dpi, user-scalable=0"/>
+    <title>De Verrekijker</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/ajax.js"></script>
+    <script type="text/javascript" src="js/open.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://blockchain.info/Resources/js/pay-now-button.js"></script>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="jumbotron" id="container">
+
+        <header id='header' class='row'>
+
+            <div id='header-left' class='left col-xs-8'>
+                <h1>De Verrekijker</h1>
+                <em>
+                    Opening doors on VU Campus,
+                    <a target="_blank"
+                       href="http://www.advalvas.vu.nl/nieuws/vu-niet-blij-met-academisch-caf%C3%A9-de-verrekijker">
+                        since May 2015
+                    </a>
+                </em>
+            </div>
+
+            <div id='header-right' class='right col-xs-4'>
+                <a id='open-box' target='_blank' href='graph.html'>
+                    <!-- overwritten when loading is done -->
+                    <em id='open-box-load'>loading...</em>
+                    <span id='open-text'></span>
+                </a>
+            </div>
+
+        </header>
+
+        <nav class='navbar navbar-default'>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_zm8Hpga7YRd-D5lcWZU1RXoauezNNycTyWhKXQdLENl5LA/viewform">
+                        <h3>Event Form</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://radar.squat.net/en/amsterdam/de-verrekijker">
+                        <h3>Radar</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/deverrekijkervu/">
+                        <h3>Facebook</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:de.verrekijker.vu@gmail.com">
+                        <h3>Email</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.google.com/maps/place/De+Verrekijker/@52.333419,4.8629908,17z">
+                        <h3>Map</h3>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <p>
+            De Verrekijker is an open and autonomous space on the VU Amsterdam campus, existing since activists of
+            <a href="https://www.facebook.com/pg/NewUni" target="_blank">De Nieuwe Universiteit</a>
+            squatted an empty storage room in May 2015.
+        </p>
+        <p>
+            We have no rules except don't be an asshole. Tea and coffee is free, with other tasty stuff (sometimes)
+            available on donation.
+        </p>
+        <p>
+            We run on volunteer basis; no-one gets paid, so don't expect good service or broad menus. If you clean up
+            after yourself you'll make us very happy.
+        </p>
+        <p>
+            We like the concepts of sharing, trust and kindness. We have racks of clothes for you to take from and
+            add to, drawers full of tools and materials that you can use for your own projects. If you look around
+            you'll probably find other objects of interest as well.
+        </p>
+        <p>
+            We host events of various kinds, including discussion groups and parties. You're welcome and encouraged to
+            <b><a href="https://docs.google.com/forms/d/e/1FAIpQLSe_zm8Hpga7YRd-D5lcWZU1RXoauezNNycTyWhKXQdLENl5LA/viewform">organize
+                any non-profit and non-exclusive events in our space</a></b>
+            as well!
+        </p>
+        <p>
+            For the most recent updates about what's going on, find us
+            <b><a target="_blank" href="https://www.facebook.com/deverrekijkervu/">on Facebook</a></b>
+            and
+            <b><a target="_blank" href="https://radar.squat.net/en/amsterdam/de-verrekijker">on Radar</a></b>
+            or come by and have a chat with us. Don't be shy, we try hard to be nice to everyone who walks in.
+        </p>
+
+        <div id="bitcoin-container" class='col-xs-12'>
+
+            <div class="blockchain-btn" data-address="1LxgQ5pJdRpPpdUzVpu7tF2wt1MQuMCAvu" data-shared="false">
+
+                <div class="blockchain stage-begin">
+                    <img src="https://blockchain.info/Resources/buttons/donate_64.png"/>
+                </div>
+
+                <div class="blockchain stage-ready">
+                    <p align="center">Bitcoin!!!111:
+                        <br><strong>[[address]]</strong></p>
+                    <p align="center" class="qr-code"></p>
+                </div>
+                <div class="blockchain stage-paid">
+                    Donation of <b>[[value]] BTC</b> Received. Thank You!
+                </div>
+                <div class="blockchain stage-error">
+                    <font color="red">[[error]]</font>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <span class="right">
+                <em>
+                    Think our website sucks?
+                    <a target="_blank" href="https://github.com/deverrekijker/deverrekijker.org">Help improve it!</a>
+                </em>
+            </span>
+        </footer>
+    </div>
+</div>
+
+<script type="text/javascript">
+    request_opentimes(); // load open times
+    setInterval(request_opentimes, 1000 * 60); // reload open times once per minute
+</script>
+</body>
+
+</html>

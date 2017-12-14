@@ -1,31 +1,26 @@
-var VERTICAL = true;
-
-var PX_PER_X = 10,
-    PX_PER_Y = 16;
-
-var init_ts, init_date;
-
-var CLOSED_COLOR = 'grey',
+const VERTICAL = true;
+const PX_PER_X = 10, PX_PER_Y = 16;
+const CLOSED_COLOR = 'grey',
     OPEN_COLOR = '#4aff3d',
     OPEN_HIGHLIGHT = 'darkgreen',
     CLOSED_HIGHLIGHT = 'black';
 
-var num_days;
-var num_divs = 0;
 
-var superdiv = document.createElement('div');
-superdiv.id = 'superdiv';
-superdiv.style.display = "block";
+let highlighted = [];
+let init_ts, init_date;
+let num_days, num_divs = 0;
 
-var tooltip = makeTooltip();
-tooltip.id = 'tooltip';
 
+const superdiv = document.createElement('div');
+superdiv.className = "block-thing";
+let tooltip = document.createElement('div');
+tooltip.className = 'tooltip hidden';
 superdiv.appendChild(tooltip);
 
-var UNITS_PER_DAY = 4 * 24;
+const UNITS_PER_DAY = 4 * 24;
 
 function makeDiv(x, y, width, height, color) {
-    var d = document.createElement('div');
+    let d = document.createElement('div');
     d.className = 'cell';
     d.style.position = "absolute";
     d.style.display = "block";
@@ -37,16 +32,10 @@ function makeDiv(x, y, width, height, color) {
     return d;
 }
 
-function makeTooltip() {
-    var d = document.createElement('div');
-    d.style.position = "absolute";
-    d.style.display = "none"
-    return d;
-}
 
 function putRect(x1, y1, x2, open) {
 
-    var d;
+    let d;
 
     if (VERTICAL) {
 
@@ -69,7 +58,6 @@ function putRect(x1, y1, x2, open) {
     return d;
 }
 
-var highlighted = [];
 
 function isOpen(id) {
     return document.getElementById(id).open
@@ -89,10 +77,9 @@ function addMinutes(date, minutes) {
 }
 
 function coordinates_to_time(coordinates) {
-    var times = [];
-    for (var i in coordinates) {
-        var minutes = 15 * coordinates[i][1] + 24 * 60 * coordinates[i][0];
-        times.push(addMinutes(init_date, minutes));
+    let times = [];
+    for (let i in coordinates) {
+        times.push(addMinutes(init_date, 15 * coordinates[i][1] + 24 * 60 * coordinates[i][0]));
     }
     return times;
 }
@@ -114,7 +101,7 @@ function timestring(d, no_hours) {
         if (isNaN(d.getDate()) || isNaN(d.getMonth())) {
             return "";
         }
-        var s = prezero(d.getDate()) + "." + prezero(d.getMonth() + 1) + "." + d.getFullYear();
+        let s = prezero(d.getDate()) + "." + prezero(d.getMonth() + 1) + "." + d.getFullYear();
         if (!no_hours) s += " " + prezero(d.getHours()) + ":" + prezero(d.getMinutes());
         return s;
     } catch (e) {
@@ -123,29 +110,29 @@ function timestring(d, no_hours) {
 }
 
 function updateTooltip(t, o) {
-    document.getElementById('tooltip').style.display = "block";
-    document.getElementById('tooltip').innerHTML = ((o) ? "Open" : "Closed") + "<br>fr " + timestring(t[0]) + "<br>to " + timestring(t[1]);
-
+    tooltip.className = 'tooltip shown';
+    tooltip.innerHTML = ((o) ? "Open" : "Closed") + "<br>fr " + timestring(t[0]) + "<br>to " + timestring(t[1]);
 }
 
 function createHandler(ds) {
-    return function() {
+    return function () {
         while (highlighted.length > 0) unhighlight(highlighted.pop());
-        for (var d in ds) {
+        for (let d in ds) {
             highlight(ds[d]);
-            updateTooltip(coordinates_to_time(document.getElementById([ds[d]]).coordinates), isOpen(ds[d]))
+            updateTooltip(coordinates_to_time(document.getElementById(ds[d]).coordinates), isOpen(ds[d]))
         }
     }
 }
-Date.prototype.addDays = function(days) {
-    var dat = new Date(this.valueOf());
+
+Date.prototype.addDays = function (days) {
+    const dat = new Date(this.valueOf());
     dat.setDate(dat.getDate() + days);
     return dat;
 };
 
 function putDateCol(days_since_init) {
 
-    var e = putRect(4 * 24, days_since_init, UNITS_PER_DAY + 10);
+    const e = putRect(4 * 24, days_since_init, UNITS_PER_DAY + 10);
     e.className = 'datecell';
     e.innerHTML = timestring(init_date.addDays(days_since_init), true);
     return e;
@@ -154,21 +141,19 @@ function putDateCol(days_since_init) {
 function visualize(data) {
 
 
-    var x1, y1, x2, y2;
+    let x1, y1, x2, y2, y;
 
-    var y;
-
-    var divs = [];
+    let divs = [];
 
     num_days = data[data.length - 1][0];
 
-    for (var i = 0; i < data.length - 1; i++) {
+    for (let i = 0; i < data.length - 1; i++) {
 
-        if (data[i].length == 3) {
+        if (data[i].length === 3) {
             continue;
         }
 
-        var open = (i % 2 == 1);
+        const open = (i % 2 === 1);
 
         x1 = data[i][1];
         y1 = data[i][0];
@@ -177,10 +162,10 @@ function visualize(data) {
 
         y = y1;
 
-        var these_divs = []; // the set of divs added for this time period
+        let these_divs = []; // the set of divs added for this time period
 
         // if same day as next change until another point this day
-        if (y1 == y2) {
+        if (y1 === y2) {
             // until next change
             these_divs.push(putRect(x1, y1, x2, open));
             these_divs[these_divs.length - 1].coordinates = [
@@ -196,7 +181,7 @@ function visualize(data) {
                 [y2, x2], open
             ];
 
-            var full_days = y2 - y1 - 1;
+            let full_days = y2 - y1 - 1;
 
             // for all full days
             while (full_days-- > 0) {
@@ -218,30 +203,33 @@ function visualize(data) {
             divs.push(putDateCol(y));
         }
 
-        var ids = [];
+        let ids = [];
 
-        for (var d in these_divs) {
-            these_divs[d].id = 'div_' + num_divs++;
-            ids.push(these_divs[d].id);
+        for (const these_div of these_divs) {
+            these_div.id = 'div_' + num_divs++;
+            ids.push(these_div.id);
         }
-        var f = createHandler(ids);
-        for (var d in these_divs) {
-            these_divs[d].onmouseover = f;
-	    these_divs[d].onmouseout = function(){
-		document.getElementById('tooltip').style.display="none";
-		while (highlighted.length > 0) unhighlight(highlighted.pop());}
-            divs.push(these_divs[d]);
+        let f = createHandler(ids);
+        for (const these_div of these_divs) {
+            these_div.onmouseover = f;
+            these_div.onmouseout = function () {
+                tooltip.className = 'tooltip hidden';
+                while (highlighted.length > 0) {
+                    unhighlight(highlighted.pop());
+                }
+            };
+            divs.push(these_div);
         }
     }
-    for (var d in divs) {
-        superdiv.appendChild(divs[d]);
+    for (const div of divs) {
+        superdiv.appendChild(div);
     }
 
-    for (var i = 1; i <= 3; i++) {
+    for (let j = 1; j <= 3; j++) {
         //document.getElementById('b'+i).style.height = PX_PER_Y * (num_days-4) + "px";
-        document.getElementById('b' + i).style.height = PX_PER_Y * (num_days + 2) + "px";
-        document.getElementById('b' + i).style.left = (i * 232) + "px";
-        document.getElementById('b' + i).style.position = "absolute";
+        document.getElementById('b' + j).style.height = PX_PER_Y * (num_days + 2) + "px";
+        document.getElementById('b' + j).style.left = (j * 232) + "px";
+        document.getElementById('b' + j).style.position = "absolute";
     }
 
     document.getElementById('vis-container').appendChild(superdiv);

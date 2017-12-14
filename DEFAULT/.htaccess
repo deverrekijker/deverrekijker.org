@@ -1,0 +1,8 @@
+RewriteEngine  on
+redirect 301 /o /open-state/minimal_info.php
+redirect 301 /g /graph.html
+redirect 301 /graph /graph.html
+redirect 301 /organize https://docs.google.com/forms/d/e/1FAIpQLSe_zm8Hpga7YRd-D5lcWZU1RXoauezNNycTyWhKXQdLENl5LA/viewform
+redirect 301 /map https://www.google.com/maps/place/De+Verrekijker/@52.333419,4.8629908,17z
+redirect 301 /fb https://www.facebook.com/deverrekijkervu/
+redirect 301 /radar https://radar.squat.net/en/amsterdam/de-verrekijker
