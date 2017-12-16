@@ -2,26 +2,24 @@
 
 // password check
 
-function validate_datapush($post)
+require_once ('config.php');
+require_once (SECRET_PATH);
+
+function bad_request($post)
 {
-
-    $log_info = array(time());
-
-    $err = 0;
-
     if (!isset($post['secret'])) {
-        $err++;
-        array_push($log_info, 'undefined secret');
-    } else if ($post['secret'] != SECRET) {
-        $err++;
-        array_push($log_info, "wrong secret : " . $post['secret']);
+
+        return 'requests contained no secret';
+
+    } else {
+
+        if ($post['secret'] != SECRET) {
+            return 'wrong secret';
+        }
     }
-    if (!isset($post['data'])) {
-        $err++;
-        array_push($log_info, 'no data');
+    if (!isset($post['data'])){
+        return 'no data';
     }
 
-    array_push($log_info, $err);
-
-    return $err < 1;
+    return false;
 }

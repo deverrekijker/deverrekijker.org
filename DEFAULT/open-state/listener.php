@@ -1,10 +1,11 @@
 <?php
+
 require_once("config.php");
-
-// file_put_contents('log2.txt',file_get_contents('log2.txt').json_encode($_POST));
-
 require_once("validate_datapush.php");
-if (!validate_datapush($_POST)) {
+
+$problem = bad_request($_POST);
+if ($problem) {
+    echo $problem;
     exit(0);
 }
 
