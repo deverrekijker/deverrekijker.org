@@ -3,45 +3,42 @@
 <head>
     <meta charset="utf-8">
     <script src="js/ajax.js"></script>
-    <script src="js/graph.js"></script>
+    <title>De Verrekijker open-times history</title>
     <link rel="stylesheet" href="css/graph.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 <body>
 
-<div class="graph_explain_box">
-    <p>
-        This graph shows the history of De Verrekijker's open times.
-        Hover segments with your mouse for details.
-        Green means open, grey means closed, and empty bits are missing data.
-        At the top is today, at the bottom is a long time ago.
-    </p>
+
+<div class="container">
+    <h1>De Verrekijker open-times history</h1>
+    <p>This chart shows when De Verrekijker has been open in the past. At the top is recently, at the bottom is a long time age. Hover your mouse or click on the green areas to see exact times.</p>
 </div>
 
+<div id="vis-container" style="width:100%"></div>
 
-<div id="bordercontainer">
-    <div id="b1" class="yalign border">06:00</div>
-    <div id="b2" class="yalign border">12:00</div>
-    <div id="b3" class="yalign border">18:00</div>
+<div class="footer">
+    <div id="tooltip" class="tooltip-inner"></div>
 </div>
-<div class='viscontainer' id="vis-container">
 
-</div>
+<script src="js/Graph.js"></script>
 <script>
     request(
-        '/open-state/get_coordinates.php',
+        '/open-state/get_graph_data.php',
         'get',
         null,
         function (server_response) {
             const data = JSON.parse(server_response);
             if (data['error'] === 'error') console.log('Server reported error:', data['error']);
+
             else {
-                init_ts = data.shift();
-                init_date = new Date(init_ts * 1000);
-                visualize(data);
+
+                let g = new Graph(data);
+                document.getElementById('vis-container').append(g.visualization);
+                g.build();
             }
         });
 </script>
 </body>
-
 </html>
