@@ -27,4 +27,4 @@ for ($i = 0; $i < count($contents); $i++) {
     }
 }
 
-echo json_encode($res);
+echo json_encode([$contents[0][0],$contents[count($contents)-1][1], $res]);

@@ -1,17 +1,39 @@
 
 .cell {
-    opacity: 0.9;
+    opacity: 0.6;
     position: absolute;
     background-color: green;
+}
+
+.outer {
+    display: flex;
+}
+
+.datenote {
+    position: absolute;
+    font-size: 10px;
+}
+
+.margin, .graphVisualization {
+    display: inline-block;
+
 }
 
 .graphVisualization {
     position: relative;
 }
 
+.graphVisualization{
+    width: 99%;
+}
+
+.margin {
+    position: relative;
+}
+
 
 .highlighted {
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .footer{
@@ -19,3 +41,4 @@
     bottom:0;
     position: fixed
 }
+
