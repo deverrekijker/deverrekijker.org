@@ -20,11 +20,9 @@
 }
 
 .graphVisualization {
+	width: 100%;
+	margin: 0 58px;
     position: relative;
-}
-
-.graphVisualization{
-    width: 99%;
 }
 
 .margin {
@@ -41,4 +39,3 @@
     bottom:0;
     position: fixed
 }
-
